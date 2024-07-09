@@ -1,12 +1,19 @@
+import 'package:e_commerce_app/core/shared/constant/consts.dart';
+import 'package:e_commerce_app/modules/screens/Home.dart';
 import 'package:e_commerce_app/modules/screens/auth_Screen/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'core/shared/network/local_network.dart';
 import 'modules/screens/SplashPage.dart';
 import 'modules/screens/auth_Screen/LoginScreen.dart';
 
-void main() {
+void main()async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await CacheNetwork.cachInitlization();
+  token=await CacheNetwork.getCachedData(key: 'token');
+
   runApp(const MyApp());
 }
 
@@ -23,12 +30,12 @@ class MyApp extends StatelessWidget {
           minTextAdapt: true,
           splitScreenMode: true,
           builder: (context, child) {
-            return MaterialApp(
+            return  MaterialApp(
               debugShowCheckedModeBanner: false,
 
 
 
-              home:  LoginScreen(),
+              home: token!=null&&token!=""? Home():LoginScreen(),
 
 
             );
