@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../core/shared/constant/formfield.dart';
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen ({super.key});
 
@@ -19,12 +21,7 @@ class RegisterScreen extends StatelessWidget {
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
 
-    return BlocProvider(
-
-
-
-        create: (context)=>authCubit(),
-    child: BlocConsumer<authCubit,AuthStates>(
+    return BlocConsumer<authCubit,AuthStates>(
       listener:(context,state){
 
         if (state is RegisterSuccessState) {
@@ -62,39 +59,39 @@ class RegisterScreen extends StatelessWidget {
 
                       ),
                     ),
-                    _TextField(hinttitle: 'User Name',controller:controller1, ),
+                    TextFieldd(hinttitle: 'User Name',controller:controller1, ),
                     SizedBox(height: 25.h,),
-                    _TextField(hinttitle: 'Email',controller:controller2, ),
-                    SizedBox(height: 25.h,),
-
-                    _TextField(hinttitle: 'Phone',controller:controller3, ),
+                    TextFieldd(hinttitle: 'Email',controller:controller2, ),
                     SizedBox(height: 25.h,),
 
-                    _TextField(hinttitle: 'Password',controller:controller4, isSecured: true),
+                    TextFieldd(hinttitle: 'Phone',controller:controller3, ),
                     SizedBox(height: 25.h,),
-                     MaterialButton(onPressed: (){
-if (formKey.currentState!.validate()) {
-  BlocProvider.of<authCubit>(context).register(name: controller1.text, email: controller2.text, password:controller4.text, phone: controller3.text);
-}
-                     },
-                       color: mainColor,
-                       textColor: Colors.white,
-                       minWidth: double.infinity,
-                       shape: RoundedRectangleBorder(
-                         borderRadius: BorderRadius.circular(4)
-                       ),
 
-                       padding: EdgeInsets.symmetric(vertical: 15),
-                       child: Text(
-                         state is RegisterLoadingState?'Loading':'Register',
-                         style: TextStyle(
-                           fontWeight: FontWeight.bold,
-                           fontSize: 15
-                         ),
-                       ),
+                    TextFieldd(hinttitle: 'Password',controller:controller4, isSecured: true),
+                    SizedBox(height: 25.h,),
+                    MaterialButton(onPressed: (){
+                      if (formKey.currentState!.validate()) {
+                        BlocProvider.of<authCubit>(context).register(name: controller1.text, email: controller2.text, password:controller4.text, phone: controller3.text);
+                      }
+                    },
+                      color: mainColor,
+                      textColor: Colors.white,
+                      minWidth: double.infinity,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(4)
+                      ),
+
+                      padding: EdgeInsets.symmetric(vertical: 15),
+                      child: Text(
+                        state is RegisterLoadingState?'Loading':'Register',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15
+                        ),
+                      ),
 
 
-                     ),
+                    ),
 
                   ],
                 ),
@@ -104,25 +101,6 @@ if (formKey.currentState!.validate()) {
 
         );
       },
-    ),);
-  }
-  Widget _TextField({bool? isSecured,required String hinttitle , required TextEditingController controller }){
-    return TextFormField(
-      obscureText: isSecured??false,
-      controller: controller,
-      validator: (input){
-        if(controller.text.isEmpty){
-          return '$hinttitle must not be empty';
-        }else{
-          return null;
-        }
-      },
-      decoration: InputDecoration(
-        hintText: hinttitle,
-        border: OutlineInputBorder(
-
-        )
-      ),
     );
   }
 }

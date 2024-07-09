@@ -9,3 +9,15 @@ class RegisterfailedState extends AuthStates{
   RegisterfailedState({required this.message});
 }
 
+
+//login states
+
+class LoginLoading extends AuthStates{}
+class LoginFailed extends AuthStates{
+  final String Message;
+  LoginFailed({required this.Message});
+}
+class LoginSuccess extends AuthStates{
+
+}
+
