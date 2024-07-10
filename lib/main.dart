@@ -1,6 +1,8 @@
 import 'package:e_commerce_app/core/shared/constant/consts.dart';
+import 'package:e_commerce_app/layout/layout_cubit/lay_out_cubit.dart';
 import 'package:e_commerce_app/modules/screens/Home.dart';
 import 'package:e_commerce_app/modules/screens/auth_Screen/auth_cubit.dart';
+import 'package:e_commerce_app/modules/screens/profileScreen/profileScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,6 +26,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(providers: [
       BlocProvider(create: (context)=>authCubit()),
+      BlocProvider(create: (context)=>LayoutCubit())
     ],
         child:  ScreenUtilInit(
           designSize: const Size(360, 690),
@@ -35,7 +38,7 @@ class MyApp extends StatelessWidget {
 
 
 
-              home: token!=null&&token!=""? Home():LoginScreen(),
+              home: token!=null&&token!=""? ProfileScreen():LoginScreen(),
 
 
             );
