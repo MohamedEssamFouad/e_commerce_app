@@ -10,6 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/shared/network/local_network.dart';
 import 'modules/screens/SplashPage.dart';
 import 'modules/screens/auth_Screen/LoginScreen.dart';
+import 'modules/screens/layoutScreen/layoutScreen.dart';
 
 void main()async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
 
 
 
-              home: token!=null&&token!=""? ProfileScreen():LoginScreen(),
+              home: token!=null&&token!=""? LayOutSCreen():LoginScreen(),
 
 
             );
