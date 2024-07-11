@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(providers: [
       BlocProvider(create: (context)=>authCubit()),
-      BlocProvider(create: (context)=>LayoutCubit()..GetBanner()..GetCat())
+      BlocProvider(create: (context)=>LayoutCubit()..GetBanner()..GetCat()..getProducts())
     ],
         child:  ScreenUtilInit(
           designSize: const Size(360, 690),
