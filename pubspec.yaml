@@ -41,6 +41,7 @@ dependencies:
   http: ^1.2.1
   bloc:
   shared_preferences: ^2.2.3
+  smooth_page_indicator:
 
 dev_dependencies:
   flutter_test:
