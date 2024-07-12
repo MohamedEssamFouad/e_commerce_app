@@ -84,9 +84,9 @@ class Home extends StatelessWidget {
                     separatorBuilder: (context, index) {
                       return SizedBox(width: 15.w);
                     },
-                    padding: EdgeInsets.symmetric(horizontal: 15),
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
                     scrollDirection: Axis.horizontal,
-                    physics: BouncingScrollPhysics(),
+                    physics:const BouncingScrollPhysics(),
                     itemCount: cubit.cat.length,
                     itemBuilder: (context, index) {
                       return CircleAvatar(
