@@ -130,4 +130,67 @@ void filterdProducts({required String input})
  emit(FilteredProductSuccess());
 }
 
+
+  List<ProductModel>Favv=[];
+  Set<String> favoritesID = {};
+
+Future <void> GetFav()async{
+
+  Response response=await http.get(
+    Uri.parse('https://student.valuxapps.com/api/favorites'),
+    headers: {
+      'lang':'en',
+      'Authorization':token!,
+    }
+
+  );
+  var ResponsedB=jsonDecode(response.body);
+      if (ResponsedB['status']==true) {
+        for(var item in ResponsedB['data']['data'])
+        {
+        Favv.add(ProductModel.fromJson(data: item['product']));
+
+
+        }
+        print('token is ${token}');
+        print('fav is ${Favv.length}');
+        emit(GetFavSucced());
+      }else{
+        emit(GetFavFailed());
+      }
+}
+  void addOrRemoveFromFavorites({required String productID}) async {
+    Response response = await http.post(
+        Uri.parse("https://student.valuxapps.com/api/favorites"),
+        headers:
+        {
+          "lang" : "en",
+          "Authorization" : token!
+        },
+        body:
+        {
+          "product_id" : productID
+        }
+    );
+    var responseBody = jsonDecode(response.body);
+    if( responseBody['status'] == true )
+    {
+      if( favoritesID.contains(productID) == true )
+      {
+        favoritesID.remove(productID);
+      }
+      else
+      {
+
+        favoritesID.add(productID);
+      }
+        await GetFav();
+      emit(AddOrRemoveItemFromFavoritesSuccessState());
+    }
+    else
+    {
+      emit(FailedToAddOrRemoveItemFromFavoritesState());
+    }
+  }
+
 }

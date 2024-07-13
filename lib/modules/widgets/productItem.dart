@@ -28,13 +28,14 @@ class prucductitems extends StatelessWidget {
         itemCount: cubit.filtered.isEmpty? cubit.product.length:cubit.filtered.length,
         itemBuilder: (context,index){
           return productItem(
+            cubit: cubit,
             model: cubit.filtered.isEmpty?cubit.product[index]:cubit.filtered[index],
           );
         });
   }
 }
 
-Widget productItem({required ProductModel model}){
+Widget productItem({required ProductModel model,required LayoutCubit cubit}){
   return Container(
     color:Colors.grey.withOpacity(0.2) ,
     padding: EdgeInsets.symmetric(vertical: 20,horizontal: 10),
@@ -50,10 +51,12 @@ Widget productItem({required ProductModel model}){
             Spacer(),
             GestureDetector(
               onTap: (){
+                cubit.addOrRemoveFromFavorites(productID: model.id.toString());
 
               },
               child: Icon(
                 Icons.favorite,size: 20,
+                color: cubit.favoritesID.contains(model.id.toString())?Colors.red:Colors.grey,
               ),
             ),
 

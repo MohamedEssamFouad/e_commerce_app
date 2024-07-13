@@ -10,6 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/shared/constant/formfield.dart';
+import '../layoutScreen/layoutScreen.dart';
 class LoginScreen extends StatelessWidget {
    LoginScreen({super.key});
 
@@ -60,7 +61,7 @@ class LoginScreen extends StatelessWidget {
                  listener:(context,state){
                    if (state is LoginSuccess) {
                      Navigator.pushReplacement(context,
-                         MaterialPageRoute(builder: (context)=>Home()));
+                         MaterialPageRoute(builder: (context)=>LayOutSCreen()));
                    }
                    if (state is LoginFailed) {
                      showDialog(context: context, builder: (context)=>AlertDialog(

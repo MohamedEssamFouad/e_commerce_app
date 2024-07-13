@@ -29,3 +29,10 @@ class CatFailed extends LayoutStates{}
 class ProductSuccess extends LayoutStates{}
 class ProductFailed extends LayoutStates{}
 class FilteredProductSuccess extends LayoutStates{}
+
+class GetFavSucced extends LayoutStates{}
+class GetFavFailed extends LayoutStates{}
+
+
+class AddOrRemoveItemFromFavoritesSuccessState extends LayoutStates{}
+class FailedToAddOrRemoveItemFromFavoritesState extends LayoutStates{}
