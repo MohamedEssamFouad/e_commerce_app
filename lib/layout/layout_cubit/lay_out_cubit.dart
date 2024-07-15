@@ -193,4 +193,32 @@ Future <void> GetFav()async{
     }
   }
 
+List<ProductModel>cart=[];
+int totalP=0;
+void GetCard()async{
+  
+  cart.clear();
+  Response response=await http.get(
+    Uri.parse('https://student.valuxapps.com/api/carts'),
+    headers: {
+      "lang" : "en",
+      "Authorization" : token!
+    },
+
+  );
+  var ResponsedDd=jsonDecode(response.body);
+  totalP=ResponsedDd['data']['total'].toInt();
+  if (ResponsedDd['status']==true)
+  {
+    for(var item in ResponsedDd['data']['cart_items']){
+      cart.add(ProductModel.fromJson(data: item['product']));
+    }
+    print('ssss ${cart.length}');
+    emit(SuccessGetCart());
+  }
+  else
+  {
+    emit(FailedGetCart());
+  }
+}
 }

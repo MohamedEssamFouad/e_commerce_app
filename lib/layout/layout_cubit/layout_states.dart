@@ -36,3 +36,6 @@ class GetFavFailed extends LayoutStates{}
 
 class AddOrRemoveItemFromFavoritesSuccessState extends LayoutStates{}
 class FailedToAddOrRemoveItemFromFavoritesState extends LayoutStates{}
+
+class SuccessGetCart extends LayoutStates{}
+class FailedGetCart extends LayoutStates{}
