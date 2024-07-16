@@ -194,8 +194,9 @@ Future <void> GetFav()async{
   }
 
 List<ProductModel>cart=[];
+Set <String> cartsId={};
 int totalP=0;
-void GetCard()async{
+Future<void> GetCard()async{
   
   cart.clear();
   Response response=await http.get(
@@ -211,6 +212,7 @@ void GetCard()async{
   if (ResponsedDd['status']==true)
   {
     for(var item in ResponsedDd['data']['cart_items']){
+      cartsId.add(item['product']['id'].toString());
       cart.add(ProductModel.fromJson(data: item['product']));
     }
     print('ssss ${cart.length}');
@@ -220,5 +222,31 @@ void GetCard()async{
   {
     emit(FailedGetCart());
   }
+}
+
+void addOrRemoveFromCard ({required String id})async{
+  Response response =await http.post(Uri.parse('https://student.valuxapps.com/api/carts'),
+
+  headers: {
+
+    "Authorization" : token!,
+    'lang':'en'
+
+  },
+    body: {
+    'product_id':id
+    }
+    
+  );
+  var ResponseBody=jsonDecode(response.body);
+  if (ResponseBody['status']==true) {
+    cartsId.contains(id)==true?cartsId.remove(id):cartsId.add(id);
+    GetCat();
+    emit(SuccessGetCart());
+  }
+  else{
+    emit(FFailedAddToCard());
+  }
+
 }
 }

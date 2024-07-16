@@ -20,7 +20,7 @@ class prucductitems extends StatelessWidget {
       crossAxisCount: 2,
       mainAxisSpacing: 10,
       crossAxisSpacing: 12,
-      childAspectRatio: 0.8,
+      childAspectRatio: 0.6,
 
 
 
@@ -36,34 +36,49 @@ class prucductitems extends StatelessWidget {
 }
 
 Widget productItem({required ProductModel model,required LayoutCubit cubit}){
-  return Container(
-    color:Colors.grey.withOpacity(0.2) ,
-    padding: EdgeInsets.symmetric(vertical: 20,horizontal: 10),
-    child: Column(
-      children: [
-        Expanded(child: Image.network(model.image!)),
-        Text(model.name!,style: TextStyle(fontWeight: FontWeight.bold,overflow: TextOverflow.ellipsis),),
-        Row(
+  return Stack(
+    alignment: Alignment.bottomCenter,
+    children: [
+      Container(
+        color:Colors.grey.withOpacity(0.2) ,
+        padding: EdgeInsets.symmetric(vertical: 40,horizontal: 10),
+        child: Column(
           children: [
-            Text('${model.price!}\$',style: TextStyle(fontSize:14.sp,overflow: TextOverflow.ellipsis),),
-            SizedBox(width: 20.h,),
-            Text('${model.oldPrice!}\$'.toString(),style: TextStyle(fontSize: 14.sp,decoration: TextDecoration.lineThrough),),
-            Spacer(),
-            GestureDetector(
-              onTap: (){
-                cubit.addOrRemoveFromFavorites(productID: model.id.toString());
+            Expanded(child: Image.network(model.image!)),
+            Text(model.name!,style: TextStyle(fontWeight: FontWeight.bold,overflow: TextOverflow.ellipsis),),
+            Row(
+              children: [
+                Text('${model.price!}\$',style: TextStyle(fontSize:14.sp,overflow: TextOverflow.ellipsis),),
+                SizedBox(width: 20.h,),
+                Text('${model.oldPrice!}\$'.toString(),style: TextStyle(fontSize: 14.sp,decoration: TextDecoration.lineThrough),),
+                Spacer(),
+                GestureDetector(
+                  onTap: (){
+                    cubit.addOrRemoveFromFavorites(productID: model.id.toString());
 
-              },
-              child: Icon(
-                Icons.favorite,size: 20,
-                color: cubit.favoritesID.contains(model.id.toString())?Colors.red:Colors.grey,
-              ),
+                  },
+                  child: Icon(
+                    Icons.favorite,size: 20,
+                    color: cubit.favoritesID.contains(model.id.toString())?Colors.red:Colors.grey,
+                  ),
+                ),
+
+
+              ],
             ),
-
-
           ],
         ),
-      ],
-    ),
+      ),
+      CircleAvatar(
+        backgroundColor: Colors.black,
+        child: GestureDetector(
+          onTap: (){
+        cubit.addOrRemoveFromCard(id: model.id.toString());
+          },
+
+          child: Icon(Icons.shopping_bag,color: cubit.cartsId.contains(model.id.toString())?Colors.red:Colors.white,),
+        ),
+      ),
+    ],
   );
 }

@@ -53,7 +53,7 @@ class Home extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 15.h),
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(

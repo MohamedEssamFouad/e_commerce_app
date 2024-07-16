@@ -70,7 +70,9 @@ class Cart extends StatelessWidget {
                                                   )
                                               ),
                                               GestureDetector(
-                                                onTap: (){},
+                                                onTap: (){
+                                                  cubit.addOrRemoveFromCard(id: cubit.cart[index].id!.toString());
+                                                },
                                                 child: const Icon(Icons.delete,color: Colors.red,),
                                               )
                                             ],
