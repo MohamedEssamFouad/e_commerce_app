@@ -43,3 +43,10 @@ class FailedGetCart extends LayoutStates{}
 class SuccessAddToCard extends LayoutStates{}
 
 class FFailedAddToCard extends LayoutStates{}
+
+class SuccessPass extends LayoutStates{}
+class LoadingPass extends LayoutStates{}
+class FailedPass extends LayoutStates{
+  String error;
+  FailedPass({required this.error});
+}

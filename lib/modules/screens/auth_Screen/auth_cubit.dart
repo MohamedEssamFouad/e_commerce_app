@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
+import 'package:e_commerce_app/core/shared/constant/consts.dart';
 import 'package:e_commerce_app/core/shared/network/local_network.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart'as http;
@@ -62,6 +63,9 @@ emit(RegisterfailedState(message: responsebody['message']));
        if (Data['status']==true) {
          debugPrint("user login success his data is : ${Data['message']}");
          await CacheNetwork.InsertToCache(key: 'token', value: Data['data']['token']);
+         await CacheNetwork.InsertToCache(key: 'password', value: password);
+         token=await CacheNetwork.getCachedData(key: 'token');
+        Current=await CacheNetwork.getCachedData(key: 'password');
          emit(LoginSuccess());
        }
        else

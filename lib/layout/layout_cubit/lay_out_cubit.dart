@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:e_commerce_app/core/shared/constant/consts.dart';
+import 'package:e_commerce_app/core/shared/network/local_network.dart';
 import 'package:e_commerce_app/model/user_model.dart';
 import 'package:e_commerce_app/modules/screens/Home.dart';
 import 'package:e_commerce_app/modules/screens/profileScreen/profileScreen.dart';
@@ -248,5 +249,29 @@ void addOrRemoveFromCard ({required String id})async{
     emit(FFailedAddToCard());
   }
 
+}
+void ChangePassword({required String usercurrent,required newPassword})async{
+  emit(LoadingPass());
+ Response response =await http.post(
+    Uri.parse('https://student.valuxapps.com/api/change-password'),
+   headers:  {
+      'lang' : 'en',
+      'Authorization' : token!
+    },
+      body: {
+        'current_password' : usercurrent,
+        'new_password' : newPassword,
+      }
+  );
+ var Responseds=jsonDecode(response.body);
+ if (Responseds['status']==true) {
+   await CacheNetwork.InsertToCache(key: 'password', value: newPassword);
+   usercurrent=await CacheNetwork.getCachedData(key: 'password');
+   emit(SuccessPass());
+ }  else{
+   emit(FailedPass(
+     error: Responseds['message']
+   ));
+ }
 }
 }

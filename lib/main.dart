@@ -16,6 +16,10 @@ void main()async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheNetwork.cachInitlization();
   token=await CacheNetwork.getCachedData(key: 'token');
+  Current=await CacheNetwork.getCachedData(key: 'password');
+  debugPrint('user token :${token}');
+  debugPrint('current :${Current}');
+
 
   runApp(const MyApp());
 }

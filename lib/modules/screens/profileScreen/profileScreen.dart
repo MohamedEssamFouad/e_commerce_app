@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/modules/screens/profileScreen/changePassword.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,6 +38,8 @@ class ProfileScreen extends StatelessWidget {
                   MaterialButton(
                     onPressed: ()
                     {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context)=>const ChangePassword()));
                     },
                     color: mainColor,
                     textColor: Colors.white,
@@ -50,7 +53,7 @@ class ProfileScreen extends StatelessWidget {
                     color: mainColor,
                     textColor: Colors.white,
                     child: const Text("Update Data"),
-                  )
+                  ),
                 ],
               ),
             ) : const Center(
